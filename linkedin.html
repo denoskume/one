@@ -1,0 +1,21 @@
+<section>
+  <h2>LinkedIn Data</h2>
+  <p id="profile-views">Profile Views: Loading...</p>
+  <p id="connection-invitations">Connection Invitations: Loading...</p>
+  <p id="latest-posts">Latest Posts: Loading...</p>
+  <script>
+    // Fetch LinkedIn data and update the DOM elements
+    async function fetchLinkedInData() {
+      try {
+        const response = await fetch('http://localhost:3000/auth/linkedin/callback');
+        const data = await response.json();
+        document.getElementById('profile-views').innerText = `Profile Views: ${data.profileViews}`;
+        document.getElementById('connection-invitations').innerText = `Connection Invitations: ${data.connectionInvitations}`;
+        document.getElementById('latest-posts').innerText = `Latest Posts: ${data.latestPosts.join(', ')}`;
+      } catch (error) {
+        console.error('Error fetching LinkedIn data:', error);
+      }
+    }
+    fetchLinkedInData();
+  </script>
+</section>

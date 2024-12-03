@@ -1,0 +1,24 @@
+<section>
+  <h2>Job Alerts</h2>
+  <div id="jobs">Loading...</div>
+  <script>
+    // Fetch job alerts and update the DOM elements
+    async function fetchJobAlerts() {
+      try {
+        const response = await fetch('https://api.example.com/job-alerts');
+        const data = await response.json();
+        const jobsContainer = document.getElementById('jobs');
+        jobsContainer.innerHTML = data.jobs.map(job => `
+          <div class="job-alert">
+            <h3>${job.title}</h3>
+            <p>${job.description}</p>
+            <a href="${job.link}" target="_blank">Apply Now</a>
+          </div>
+        `).join('');
+      } catch (error) {
+        console.error('Error fetching job alerts:', error);
+      }
+    }
+    fetchJobAlerts();
+  </script>
+</section>
